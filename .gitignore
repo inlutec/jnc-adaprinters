@@ -1,0 +1,67 @@
+# Laravel
+/backend/vendor/
+/backend/node_modules/
+/backend/.env
+/backend/.env.backup
+/backend/.env.production
+/backend/.phpunit.result.cache
+/backend/Homestead.json
+/backend/Homestead.yaml
+/backend/npm-debug.log
+/backend/yarn-error.log
+/backend/.idea
+/backend/.vscode
+/backend/storage/*.key
+/backend/storage/logs/*.log
+/backend/storage/framework/cache/*
+/backend/storage/framework/sessions/*
+/backend/storage/framework/views/*
+/backend/bootstrap/cache/*
+!backend/storage/.gitignore
+!backend/storage/app/.gitignore
+!backend/storage/app/public/.gitignore
+!backend/storage/framework/.gitignore
+!backend/storage/framework/cache/.gitignore
+!backend/storage/framework/cache/data/.gitignore
+!backend/storage/framework/sessions/.gitignore
+!backend/storage/framework/testing/.gitignore
+!backend/storage/framework/views/.gitignore
+!backend/storage/logs/.gitignore
+/backend/public/hot
+/backend/public/storage
+/backend/public/build
+/backend/public/.htaccess
+
+# Frontend
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env
+/frontend/.env.local
+/frontend/.env.*.local
+/frontend/.vscode
+/frontend/.idea
+
+# Docker
+docker/backend.env.local
+docker/.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Backup
+*.sql
+*.sql.gz
+*.dump
+backups/
