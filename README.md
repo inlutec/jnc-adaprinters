@@ -1,6 +1,10 @@
 # JNC-AdaPrinters
 
+[![GitHub](https://img.shields.io/badge/GitHub-inlutec%2Fjnc--adaprinters-blue)](https://github.com/inlutec/jnc-adaprinters)
+
 Plataforma de nueva generación para la Agencia Digital de Andalucía orientada a la **gestión integral de impresoras y consumibles**: descubrimiento SNMP, inventario inteligente, alertas multicanal y registro histórico de impresiones.
+
+**Repositorio**: https://github.com/inlutec/jnc-adaprinters
 
 ## 📚 Documentación Completa
 
@@ -29,6 +33,10 @@ jnc-adaprinters/
 ├── docs/         # Documentación completa del proyecto
 └── .github/      # Workflows CI
 ```
+
+## 🚀 Inicio Rápido
+
+Para una implementación rápida desde cero, consulta la **[Guía Rápida](QUICKSTART.md)**.
 
 ## Requisitos
 
