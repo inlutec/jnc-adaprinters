@@ -65,3 +65,4 @@ logs/
 *.sql.gz
 *.dump
 backups/
+EstadisticasImpresorasGMEnero2026.csv
