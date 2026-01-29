@@ -30,20 +30,46 @@ if [ "$PHP_MAJOR" -lt 8 ]; then
     echo "⚠️  Advertencia: Se recomienda PHP 8.0 o superior. Actual: PHP $PHP_VERSION"
 fi
 
-# Descargar e instalar Composer
+# Descargar o usar instalador local de Composer
 echo ""
-echo "📥 Descargando Composer..."
-EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOCAL_INSTALLER="$SCRIPT_DIR/composer-installer/composer-setup.php"
+LOCAL_SIG="$SCRIPT_DIR/composer-installer/composer-installer.sig"
 
-if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
-    >&2 echo '❌ Error: Checksum de Composer no coincide. Abortando.'
-    rm composer-setup.php
-    exit 1
+if [ -f "$LOCAL_INSTALLER" ]; then
+    echo "📦 Usando instalador local de Composer..."
+    cp "$LOCAL_INSTALLER" composer-setup.php
+    
+    # Verificar checksum si está disponible localmente
+    if [ -f "$LOCAL_SIG" ]; then
+        EXPECTED_CHECKSUM="$(cat "$LOCAL_SIG")"
+        ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+        
+        if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
+            >&2 echo '❌ Error: Checksum del instalador local no coincide. Descargando desde internet...'
+            rm composer-setup.php
+            # Continuar con descarga desde internet
+        else
+            echo "✓ Checksum del instalador local verificado"
+        fi
+    fi
 fi
 
-echo "✓ Checksum verificado"
+# Si no hay instalador local o el checksum falló, descargar desde internet
+if [ ! -f composer-setup.php ]; then
+    echo "📥 Descargando Composer desde internet..."
+    EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+    
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
+        >&2 echo '❌ Error: Checksum de Composer no coincide. Abortando.'
+        rm composer-setup.php
+        exit 1
+    fi
+    
+    echo "✓ Checksum verificado"
+fi
 
 # Instalar Composer globalmente
 echo ""

@@ -66,3 +66,4 @@ logs/
 *.dump
 backups/
 EstadisticasImpresorasGMEnero2026.csv
+composer-installer/
